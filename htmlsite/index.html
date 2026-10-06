@@ -211,20 +211,21 @@ const TIMELINE = [
    fill in MEMORY_LANE_CAPTIONS below (same order as the photos, mem01,
    mem02, ...) whenever you're ready and they'll appear under each photo
    and in the lightbox. Leave an entry blank to skip just that one. */
-function photos(folder, count, prefix){
+function photos(folder, count, prefix, excluded = []){
   const list = [];
   for (let i = 1; i <= count; i++) {
+    if (excluded.includes(i)) continue;
     list.push(`assets/${folder}/${prefix}${String(i).padStart(2,'0')}.jpeg`);
   }
   return list;
 }
 const MEMORY_LANE_CAPTIONS = [
-  '', '', '', '', '', '', '', '', '', '',
+  'January 2020', 'Thee Date', 'The Date', 'Pre-Dating date', '', '', 'Oil & Gas Convention 2019', 'College Of Natural Sciences DInner 2017', 'Campus Days', 'Gideons Birthday DInner 2023',
 ];
 const GALLERY_SECTIONS = [
-  { title: 'The Kukyaala', photos: photos('kukyaala', 19, 'kuk') },
+  { title: 'The Kukyaala', photos: photos('kukyaala', 19, 'kuk', [8]) },
   { title: 'Road Down Memory Lane', photos: photos('memorylane', 10, 'mem'), captions: MEMORY_LANE_CAPTIONS },
-  { title: 'Proposal', photos: photos('proposal', 24, 'prop') },
+  { title: 'Proposal', photos: photos('proposal', 24, 'prop', [19]) },
 ];
 const ALL_PHOTOS = GALLERY_SECTIONS.flatMap(s => s.photos);
 const ALL_CAPTIONS = GALLERY_SECTIONS.flatMap(s => s.photos.map((_, i) => (s.captions && s.captions[i]) || ''));
