@@ -1,0 +1,705 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gideon &amp; Margie — 12th December</title>
+<meta name="description" content="Join us as we celebrate the wedding of Gideon and Margie, Saturday 12th December." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --display: 'Italiana', serif;
+    --script: 'Cormorant Garamond', serif;
+    --body: 'Jost', system-ui, sans-serif;
+    --ivory: #FBF7EE;
+    --ivoryDeep: #F1E9D6;
+    --primary: #1F3A2E;
+    --primaryDeep: #132720;
+    --accent: #B8933D;
+    --accentLight: #D8BE7C;
+    --secondary: #6E2A3B;
+    --charcoal: #24261F;
+    --muted: #6B6F5E;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; font-family:var(--body); background:var(--ivory); color:var(--charcoal); -webkit-font-smoothing:antialiased; }
+  a{ color:inherit; text-decoration:none; }
+  button{ font-family:inherit; cursor:pointer; }
+  input, textarea{ font-family:inherit; }
+  img{ max-width:100%; display:block; }
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(18px);} to{ opacity:1; transform:translateY(0);} }
+  .rise-in{ animation: riseIn .9s ease forwards; }
+
+  @keyframes kenBurnsSlow{
+    0%{ transform:scale(1.06) translate(0,0); }
+    50%{ transform:scale(1.16) translate(-1.5%,-1%); }
+    100%{ transform:scale(1.06) translate(0,0); }
+  }
+  .bg-alive{ animation:kenBurnsSlow 26s ease-in-out infinite; will-change:transform; }
+  .bg-alive-slower{ animation:kenBurnsSlow 34s ease-in-out infinite; will-change:transform; }
+
+  .gallery-tile{
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    border: none;
+    padding: 0;
+    background: var(--primary);
+    display: block;
+    min-width: 0;
+  }
+  .gallery-tile img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease; }
+  .gallery-tile:hover img{ transform:scale(1.08); }
+
+  @keyframes gmPulse {
+    0%, 100% { transform: scale(0.92); opacity: 0.55; }
+    50%      { transform: scale(1.04); opacity: 1; }
+  }
+  @keyframes gmRingSpin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes gmShimmer {
+    0%   { background-position: -150% 0; }
+    100% { background-position: 150% 0; }
+  }
+
+  .gallery-photo-shell {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-width: 0;
+    overflow: hidden;
+    background: #F1E9D6;
+  }
+  .gallery-photo-shell .gm-loader {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F1E9D6;
+    z-index: 1;
+    transition: opacity 0.22s ease;
+  }
+  .gallery-photo-shell .gm-loader::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(100deg, transparent 35%, rgba(184,147,61,0.22) 50%, transparent 65%);
+    background-size: 250% 100%;
+    animation: gmShimmer 2.4s ease-in-out infinite;
+  }
+  .gallery-photo-shell .gm-loader-mark {
+    position: relative;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1.5px solid #B8933D;
+    background: rgba(251,247,238,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: gmPulse 1.7s ease-in-out infinite;
+    z-index: 1;
+  }
+  .gallery-photo-shell .gm-loader-mark::after {
+    content: '';
+    position: absolute;
+    inset: -7px;
+    border-radius: 50%;
+    border: 1.5px solid transparent;
+    border-top-color: #B8933D;
+    animation: gmRingSpin 1.3s linear infinite;
+  }
+  .gallery-photo-shell .gm-loader-mark span {
+    font-family: 'Italiana', serif;
+    font-size: 17px;
+    letter-spacing: 1px;
+    color: #1F3A2E;
+  }
+  .gallery-photo-shell img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    opacity: 1;
+    transition: opacity .25s ease;
+  }
+  .gallery-photo-shell.loaded img {
+    opacity: 1;
+  }
+  .gallery-photo-shell .gm-loader {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .gallery-photo-shell.loaded .gm-loader {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-photo-shell .gm-loader::before,
+    .gallery-photo-shell .gm-loader-mark,
+    .gallery-photo-shell .gm-loader-mark::after { animation: none; }
+  }
+
+  .lock-card{
+    background:#fff; border:1px dashed var(--accent); border-radius:16px; padding:40px 28px;
+    text-align:center;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .rise-in, .bg-alive, .bg-alive-slower, .gallery-tile img{ animation:none !important; transition:none !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+/* ================================================================== */
+/*                     */
+/* ================================================================== */
+const WHATSAPP_LINK = 'https://chat.whatsapp.com/LSDvd3VXtH3ISm2g4io8y8';
+const CONTACT_PHONE_DISPLAY = '0762650096';
+const CONTACT_PHONE_INTL = '256762650096';const BANK_TRANSFER_NOTE = 'Housing Finance Bank • Kibirige Gideon • A/C 1150023890225';
+// Mobile money merchant codes for pledges
+const MTN_MERCHANT_CODE = '61022077';
+const AIRTEL_MERCHANT_CODE = '7231540';
+
+// If you want the RSVP/Pledge forms to actually save responses, create a
+// free Supabase project, run the matching schema in its SQL editor, then
+// paste your Project URL and anon public key below.
+const SUPABASE_URL = 'https://mifzfucxwwqbjpfvlrni.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZnpmdWN4d3dxYmpwZnZscm5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3Njc5NDgsImV4cCI6MjEwNDM0Mzk0OH0.oCbthMJIL09rKz-ZWxZlNHVStzklviSyCjAdG7b8b7k';
+const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
+
+const WEDDING_DATE_ISO = '2026-12-12T10:00:00+03:00'; // EDIT ME if the year is different
+const WEDDING_DATE_LABEL = 'Saturday \u00b7 12th December';
+
+const VENUE = {
+  icon: '\u{1F942}',
+  name: 'Kalanoga Resort',
+  address: 'Busabala, Uganda',
+  time: '10:00 AM',
+  mapsQuery: 'Kalanoga Resort Busabala Uganda',
+};
+
+const TIMELINE = [
+  { time: '9:00 AM', label: 'Guests Arrival & Seating', note: VENUE.name },
+  { time: '10:00 AM', label: 'Wedding Ceremony' },
+  { time: '12:00 PM', label: 'Photography Session' },
+  { time: '1:00 PM', label: 'Reception Begins' },
+  { time: '2:00 PM', label: 'Speeches & Toasts' },
+  { time: '3:30 PM', label: 'Cake Cutting' },
+  { time: '4:30 PM', label: 'First Dance & Celebrations' },
+  { time: '8:00 PM', label: 'Send-Off' },
+];
+
+/* Gallery, split into three categories. No captions are shown by default —
+   just accessible alt text. "Road Down Memory Lane" supports captions:
+   fill in MEMORY_LANE_CAPTIONS below (same order as the photos, mem01,
+   mem02, ...) whenever you're ready and they'll appear under each photo
+   and in the lightbox. Leave an entry blank to skip just that one. */
+function photos(folder, count, prefix){
+  const list = [];
+  for (let i = 1; i <= count; i++) {
+    list.push(`assets/${folder}/${prefix}${String(i).padStart(2,'0')}.jpeg`);
+  }
+  return list;
+}
+const MEMORY_LANE_CAPTIONS = [
+  '', '', '', '', '', '', '', '', '', '',
+];
+const GALLERY_SECTIONS = [
+  { title: 'The Kukyaala', photos: photos('kukyaala', 19, 'kuk') },
+  { title: 'Road Down Memory Lane', photos: photos('memorylane', 10, 'mem'), captions: MEMORY_LANE_CAPTIONS },
+  { title: 'Proposal', photos: photos('proposal', 24, 'prop') },
+];
+const ALL_PHOTOS = GALLERY_SECTIONS.flatMap(s => s.photos);
+const ALL_CAPTIONS = GALLERY_SECTIONS.flatMap(s => s.photos.map((_, i) => (s.captions && s.captions[i]) || ''));
+
+const c = { ivory:'#FBF7EE', ivoryDeep:'#F1E9D6', primary:'#1F3A2E', primaryDeep:'#132720', accent:'#B8933D', accentLight:'#D8BE7C', secondary:'#6E2A3B', charcoal:'#24261F', muted:'#6B6F5E' };
+
+/* ================================================================== */
+/*  State                                                              */
+/* ================================================================== */
+const state = {
+  galleryIndex: null,
+  rsvp: { fullName:'', phone:'', email:'', attending:'yes', guestCount:1, message:'', status:'idle' },
+  pledge: { fullName:'', phone:'', amount:'', message:'', status:'idle' },
+  pledgeMade: localStorage.getItem('pledgeMade') === 'true',
+};
+
+function escapeAttr(s){ return String(s).replace(/"/g, '&quot;'); }
+
+/* ================================================================== */
+/*  Small pieces of markup                                             */
+/* ================================================================== */
+function vineDividerHTML(){
+  return `<div style="display:flex;justify-content:center;padding:8px 0 32px;">
+    <svg width="220" height="28" viewBox="0 0 220 28" fill="none" aria-hidden="true">
+      <path d="M4 14c20-14 40 14 60 0s40-14 60 0 40 14 60 0 26-8 32-8" stroke="${c.accent}" stroke-width="1.4" stroke-linecap="round"/>
+      <circle cx="24" cy="9" r="2.4" fill="${c.accent}"/><circle cx="80" cy="19" r="2.4" fill="${c.accent}"/>
+      <circle cx="140" cy="9" r="2.4" fill="${c.accent}"/><circle cx="196" cy="19" r="2.4" fill="${c.accent}"/>
+    </svg>
+  </div>`;
+}
+
+function monogramHTML(size){
+  size = size || 88;
+  return `<div style="width:${size}px;height:${size}px;border-radius:50%;border:1.5px solid ${c.accent};display:flex;align-items:center;justify-content:center;margin:0 auto;position:relative;">
+    <div style="position:absolute;inset:6px;border-radius:50%;border:1px solid ${c.accentLight};opacity:.5;"></div>
+    <span style="font-family:var(--display);font-size:${size*0.36}px;color:${c.accentLight};letter-spacing:2px;">G&nbsp;&amp;&nbsp;M</span>
+  </div>`;
+}
+
+function sectionHeadingHTML(eyebrow, title, sub){
+  return `<div style="text-align:center;margin-bottom:44px;">
+    <div style="font-family:var(--body);font-size:12px;letter-spacing:4px;text-transform:uppercase;color:${c.accent};margin-bottom:10px;font-weight:500;">${eyebrow}</div>
+    <h2 style="font-family:var(--display);font-weight:400;font-size:clamp(28px,4vw,42px);color:${c.primary};margin:0;letter-spacing:1px;">${title}</h2>
+    ${sub ? `<p style="font-family:var(--script);font-style:italic;font-size:20px;color:${c.muted};margin-top:10px;max-width:480px;margin-inline:auto;">${sub}</p>` : ''}
+  </div>`;
+}
+
+/* ================================================================== */
+/*  Gallery (three categories, shared lightbox, no captions)           */
+/* ================================================================== */
+function gallerySectionHTML(section, offset){
+  const tiles = section.photos.map((src, i) => {
+    const caption = section.captions && section.captions[i];
+    return `
+    <div>
+      <button class="gallery-tile" data-gallery-index="${offset + i}" aria-label="Open photo ${i + 1} from ${escapeAttr(section.title)}">
+        <div class="gallery-photo-shell">
+          <div class="gm-loader" aria-hidden="true">
+            <div class="gm-loader-mark"><span>G&nbsp;&amp;&nbsp;M</span></div>
+          </div>
+          <img src="${src}" alt="${escapeAttr(caption || section.title + ' photo ' + (i + 1))}" loading="lazy">
+        </div>
+      </button>
+      ${caption ? `<div style="font-family:var(--script);font-style:italic;font-size:14px;color:${c.muted};text-align:center;margin-top:6px;">${caption}</div>` : ''}
+    </div>`;
+  }).join('');
+  return `
+    <div style="margin-bottom:56px;">
+      <h3 style="font-family:var(--display);font-weight:400;font-size:24px;color:${c.primary};text-align:center;margin:0 0 22px;">${section.title}</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px 12px;">${tiles}</div>
+    </div>`;
+}
+function galleryHTML(){
+  let offset = 0;
+  const blocks = GALLERY_SECTIONS.map(section => {
+    const html = gallerySectionHTML(section, offset);
+    offset += section.photos.length;
+    return html;
+  });
+  return blocks.join('');
+}
+
+function openLightbox(index){ state.galleryIndex = index; renderLightbox(); }
+function closeLightbox(){ state.galleryIndex = null; renderLightbox(); }
+function stepLightbox(delta){
+  const n = ALL_PHOTOS.length;
+  state.galleryIndex = (state.galleryIndex + delta + n) % n;
+  renderLightbox();
+}
+function renderLightbox(){
+  const el = document.getElementById('lightbox');
+  if (state.galleryIndex === null) { el.innerHTML = ''; return; }
+  const src = ALL_PHOTOS[state.galleryIndex];
+  const caption = ALL_CAPTIONS[state.galleryIndex];
+  el.innerHTML = `
+    <div id="lightboxOverlay" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(19,39,32,0.94);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;">
+      <button id="lbClose" aria-label="Close" style="position:absolute;top:20px;right:24px;background:none;border:none;color:${c.ivory};font-size:28px;line-height:1;">&times;</button>
+      <button id="lbPrev" aria-label="Previous photo" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:${c.ivory};font-size:32px;padding:12px;">&#8249;</button>
+      <button id="lbNext" aria-label="Next photo" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:${c.ivory};font-size:32px;padding:12px;">&#8250;</button>
+      <div id="lbInner" style="max-width:90vw;max-height:90vh;text-align:center;">
+        <img src="${src}" alt="" style="max-width:100%;max-height:85vh;border-radius:10px;display:block;margin:0 auto;">
+        ${caption ? `<div style="font-family:var(--script);font-style:italic;font-size:20px;color:${c.accentLight};margin-top:16px;">${caption}</div>` : ''}
+      </div>
+    </div>`;
+  document.getElementById('lightboxOverlay').addEventListener('click', closeLightbox);
+  document.getElementById('lbInner').addEventListener('click', e => e.stopPropagation());
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); stepLightbox(-1); });
+  document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); stepLightbox(1); });
+}
+document.addEventListener('keydown', e => {
+  if (state.galleryIndex === null) return;
+  if (e.key === 'Escape') closeLightbox();
+  if (e.key === 'ArrowRight') stepLightbox(1);
+  if (e.key === 'ArrowLeft') stepLightbox(-1);
+});
+
+/* ================================================================== */
+/*  Countdown                                                           */
+/* ================================================================== */
+let countdownTimer = null;
+function startCountdown(){
+  if (countdownTimer) clearInterval(countdownTimer);
+  const target = new Date(WEDDING_DATE_ISO).getTime();
+  function tick(){
+    const remaining = Math.max(target - Date.now(), 0);
+    const totalSeconds = Math.floor(remaining / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+    const box = document.getElementById('countdownBox');
+    if (!box) return;
+    if (remaining <= 0) {
+      box.innerHTML = `<div style="font-family:var(--script);font-style:italic;font-size:26px;color:${c.accentLight};">It&rsquo;s the big day! See you there. \u{1F389}</div>`;
+      return;
+    }
+    const blocks = [['Days', days], ['Hours', hours], ['Minutes', minutes], ['Seconds', seconds]];
+    box.innerHTML = `<div style="display:flex;justify-content:center;gap:12px;flex-wrap:wrap;">` +
+      blocks.map(([label, value]) => `
+        <div style="background:rgba(251,247,238,0.06);border:1px solid ${c.accent}55;border-radius:10px;padding:18px 14px;min-width:76px;text-align:center;backdrop-filter:blur(6px);">
+          <div style="font-family:var(--display);font-size:clamp(28px,5vw,40px);color:${c.accentLight};line-height:1;">${String(value).padStart(2,'0')}</div>
+          <div style="font-family:var(--body);font-size:11px;letter-spacing:2px;text-transform:uppercase;color:${c.ivoryDeep};margin-top:8px;">${label}</div>
+        </div>`).join('') + `</div>`;
+  }
+  tick();
+  countdownTimer = setInterval(tick, 1000);
+}
+
+/* ================================================================== */
+/*  Forms                                                                */
+/* ================================================================== */
+function notConfiguredNoticeHTML(){
+  return `<div style="background:${c.accent}14;border:1px solid ${c.accent}44;border-radius:10px;padding:14px 18px;font-size:13px;color:${c.muted};text-align:center;">
+    This form isn&rsquo;t connected yet &mdash; add your Supabase project URL and anon key near the top of this file to start collecting responses.
+  </div>`;
+}
+function inputStyle(){ return `width:100%;padding:12px 14px;border-radius:8px;border:1px solid ${c.primary}33;font-size:14px;background:#fff;color:${c.charcoal};font-family:var(--body);`; }
+function labelStyle(){ return `display:block;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:${c.muted};margin-bottom:6px;font-weight:500;`; }
+
+async function submitToSupabase(table, payload){
+  if (!isSupabaseConfigured) return { error: 'not configured' };
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        'Prefer': 'return=minimal',
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) return { error: await res.text() };
+    return { error: null };
+  } catch (err) {
+    return { error: String(err) };
+  }
+}
+
+function pledgeFormHTML(){
+  const p = state.pledge;
+  if (p.status === 'success') {
+    return `<div style="text-align:center;padding:30px 20px;background:#fff;border-radius:16px;border:1px solid ${c.accent}33;">
+      <div style="font-size:32px;margin-bottom:8px;">\u{1F49B}</div>
+      <div style="font-family:var(--display);font-size:22px;color:${c.primary};margin-bottom:6px;">Thank you so much!</div>
+      <p style="color:${c.muted};font-size:14px;">Your pledge means the world to us &mdash; RSVP has now been unlocked below.</p>
+    </div>`;
+  }
+  return `<form id="pledgeForm" style="background:#fff;border:1px solid ${c.accent}33;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px;">
+    ${!isSupabaseConfigured ? notConfiguredNoticeHTML() : ''}
+    <div style="background:${c.primary}0d;border:1px solid ${c.primary}22;border-radius:10px;padding:16px 18px;font-size:13px;color:${c.primary};">
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;">
+        <img src="assets/logos/mtn.png" alt="MTN" style="height:22px;width:auto;">
+        <span style="text-align:right;">Merchant Code<br><b style="font-size:15px;">${MTN_MERCHANT_CODE}</b></span>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0;border-top:1px solid ${c.primary}18;margin-top:4px;">
+        <img src="assets/logos/airtel.png" alt="Airtel" style="height:22px;width:auto;">
+        <span style="text-align:right;">Merchant Code<br><b style="font-size:15px;">${AIRTEL_MERCHANT_CODE}</b></span>
+      </div>
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid ${c.primary}18;text-align:center;line-height:1.5;">
+        <strong>Bank Transfer:</strong> ${BANK_TRANSFER_NOTE}
+      </div>
+    </div>
+    <div><label style="${labelStyle()}">Full Name</label>
+      <input name="fullName" required style="${inputStyle()}" value="${escapeAttr(p.fullName)}" placeholder="Your name"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div><label style="${labelStyle()}">Phone</label>
+        <input name="phone" style="${inputStyle()}" value="${escapeAttr(p.phone)}" placeholder="07XX XXX XXX"></div>
+      <div><label style="${labelStyle()}">Pledge Amount (UGX)</label>
+        <input name="amount" type="number" min="1" required style="${inputStyle()}" value="${escapeAttr(p.amount)}" placeholder="50,000"></div>
+    </div>
+    <div><label style="${labelStyle()}">Message (optional)</label>
+      <textarea name="message" style="${inputStyle()};min-height:70px;resize:vertical;" placeholder="A word of blessing for the couple">${p.message}</textarea></div>
+    ${p.status === 'error' ? `<div style="color:${c.secondary};font-size:13px;">Something went wrong &mdash; please try again.</div>` : ''}
+    <button type="submit" ${!isSupabaseConfigured ? 'disabled' : ''} style="background:${c.secondary};color:${c.ivory};border:none;border-radius:999px;padding:13px;font-size:14px;letter-spacing:1px;font-weight:600;text-transform:uppercase;opacity:${p.status==='submitting'?0.7:1};">
+      ${p.status === 'submitting' ? 'Sending\u2026' : 'Submit Pledge'}
+    </button>
+  </form>`;
+}
+
+function rsvpFormHTML(){
+  const r = state.rsvp;
+  if (r.status === 'success') {
+    return `<div style="text-align:center;padding:30px 20px;background:#fff;border-radius:16px;border:1px solid ${c.accent}33;">
+      <div style="font-size:32px;margin-bottom:8px;">\u{1F33F}</div>
+      <div style="font-family:var(--display);font-size:22px;color:${c.primary};margin-bottom:6px;">Thank you!</div>
+      <p style="color:${c.muted};font-size:14px;">Your RSVP has been received. We can&rsquo;t wait to celebrate with you.</p>
+    </div>`;
+  }
+  return `<form id="rsvpForm" style="background:#fff;border:1px solid ${c.accent}33;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px;">
+    ${!isSupabaseConfigured ? notConfiguredNoticeHTML() : ''}
+    <div><label style="${labelStyle()}">Full Name</label>
+      <input name="fullName" required style="${inputStyle()}" value="${escapeAttr(r.fullName)}" placeholder="Your name"></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+      <div><label style="${labelStyle()}">Phone</label>
+        <input name="phone" style="${inputStyle()}" value="${escapeAttr(r.phone)}" placeholder="07XX XXX XXX"></div>
+      <div><label style="${labelStyle()}">Email (optional)</label>
+        <input name="email" type="email" style="${inputStyle()}" value="${escapeAttr(r.email)}" placeholder="you@example.com"></div>
+    </div>
+    <div><label style="${labelStyle()}">Will you attend?</label>
+      <div style="display:flex;gap:10px;">
+        <button type="button" data-attend="yes" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid ${c.primary};background:${r.attending==='yes'?c.primary:'transparent'};color:${r.attending==='yes'?c.ivory:c.primary};font-size:14px;">Joyfully Accept</button>
+        <button type="button" data-attend="no" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid ${c.primary};background:${r.attending==='no'?c.primary:'transparent'};color:${r.attending==='no'?c.ivory:c.primary};font-size:14px;">Regretfully Decline</button>
+      </div>
+    </div>
+    ${r.attending === 'yes' ? `<div><label style="${labelStyle()}">Number of Guests</label>
+      <input name="guestCount" type="number" min="1" max="10" style="${inputStyle()}" value="${r.guestCount}"></div>` : ''}
+    <div><label style="${labelStyle()}">Message (optional)</label>
+      <textarea name="message" style="${inputStyle()};min-height:80px;resize:vertical;" placeholder="Any dietary notes or well-wishes">${r.message}</textarea></div>
+    ${r.status === 'error' ? `<div style="color:${c.secondary};font-size:13px;">Something went wrong &mdash; please try again.</div>` : ''}
+    ${r.status === 'needs-pledge' ? `<div style="color:${c.secondary};font-size:13px;text-align:center;">Almost there &mdash; please make your pledge first, then come straight back here. <a href="#pledge" style="color:${c.primary};text-decoration:underline;">Go to Pledge</a></div>` : ''}
+    <button type="submit" ${!isSupabaseConfigured ? 'disabled' : ''} style="background:${c.accent};color:${c.primaryDeep};border:none;border-radius:999px;padding:13px;font-size:14px;letter-spacing:1px;font-weight:600;text-transform:uppercase;opacity:${r.status==='submitting'?0.7:1};">
+      ${r.status === 'submitting' ? 'Sending\u2026' : 'RSVP for the Wedding'}
+    </button>
+  </form>`;
+}
+
+function attachFormHandlers(){
+  const pledgeForm = document.getElementById('pledgeForm');
+  if (pledgeForm) {
+    pledgeForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(pledgeForm);
+      state.pledge.fullName = fd.get('fullName') || '';
+      state.pledge.phone = fd.get('phone') || '';
+      state.pledge.amount = fd.get('amount') || '';
+      state.pledge.message = fd.get('message') || '';
+      state.pledge.status = 'submitting';
+      renderPledgeSection();
+      const { error } = await submitToSupabase('pledges', {
+        full_name: state.pledge.fullName, phone: state.pledge.phone,
+        amount: Number(state.pledge.amount), message: state.pledge.message,
+      });
+      state.pledge.status = error ? 'error' : 'success';
+      if (!error) {
+        state.pledgeMade = true;
+        localStorage.setItem('pledgeMade', 'true');
+        renderRsvpSection();
+        updateRsvpVisibility();
+      }
+      renderPledgeSection();
+    });
+  }
+  const rsvpForm = document.getElementById('rsvpForm');
+  if (rsvpForm) {
+    rsvpForm.querySelectorAll('[data-attend]').forEach(btn => {
+      btn.addEventListener('click', () => { state.rsvp.attending = btn.dataset.attend; renderRsvpSection(); });
+    });
+    rsvpForm.addEventListener('submit', async e => {
+      e.preventDefault();
+      const fd = new FormData(rsvpForm);
+      state.rsvp.fullName = fd.get('fullName') || '';
+      state.rsvp.phone = fd.get('phone') || '';
+      state.rsvp.email = fd.get('email') || '';
+      state.rsvp.message = fd.get('message') || '';
+      state.rsvp.guestCount = Number(fd.get('guestCount')) || 1;
+      if (!state.pledgeMade) {
+        state.rsvp.status = 'needs-pledge';
+        renderRsvpSection();
+        return;
+      }
+      state.rsvp.status = 'submitting';
+      renderRsvpSection();
+      const { error } = await submitToSupabase('rsvps', {
+        full_name: state.rsvp.fullName, phone: state.rsvp.phone, email: state.rsvp.email,
+        attending: state.rsvp.attending, guest_count: state.rsvp.guestCount, message: state.rsvp.message,
+      });
+      state.rsvp.status = error ? 'error' : 'success';
+      renderRsvpSection();
+    });
+  }
+}
+function renderPledgeSection(){
+  document.getElementById('pledgeFormWrap').innerHTML = pledgeFormHTML();
+  attachFormHandlers();
+}
+function renderRsvpSection(){
+  document.getElementById('rsvpFormWrap').innerHTML = rsvpFormHTML();
+  attachFormHandlers();
+}
+function updateRsvpVisibility(){
+  const rsvpSection = document.getElementById('rsvp');
+  const rsvpLink = document.querySelector('a[href="#rsvp"]');
+  if (rsvpSection) rsvpSection.style.display = state.pledgeMade ? '' : 'none';
+  if (rsvpLink) rsvpLink.style.display = state.pledgeMade ? '' : 'none';
+}
+
+/* ================================================================== */
+/*  WhatsApp icon                                                       */
+/* ================================================================== */
+const WHATSAPP_ICON_PATH = 'M12 2a10 10 0 0 0-8.6 15.1L2 22l5.06-1.33A10 10 0 1 0 12 2zm0 18.2a8.16 8.16 0 0 1-4.17-1.14l-.3-.18-3 .79.8-2.93-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.14c-.24-.12-1.44-.71-1.67-.8-.22-.08-.38-.12-.55.12-.16.24-.63.8-.77.96-.14.16-.28.18-.53.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.55-1.33-.76-1.82-.2-.48-.4-.42-.55-.42h-.47c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.7 2.6 4.13 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28z';
+function whatsappIcon(size){ size = size || 18; return `<svg viewBox="0 0 24 24" width="${size}" height="${size}" fill="currentColor"><path d="${WHATSAPP_ICON_PATH}"/></svg>`; }
+
+/* ================================================================== */
+/*  Full page render                                                    */
+/* ================================================================== */
+function activateGalleryImages(){
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.gallery-photo-shell').forEach(shell => shell.classList.add('loaded'));
+  });
+}
+
+function render(){
+  document.title = 'Gideon & Margie — 12th December';
+
+  const navLinks = [
+    { href:'#venue', label:'Venue' },
+    { href:'#timeline', label:'Timeline' },
+    { href:'#gallery', label:'Gallery' },
+    { href:'#pledge', label:'Pledge' },
+    { href:'#rsvp', label:'RSVP' },
+  ];
+
+  document.getElementById('root').innerHTML = `
+  <div style="font-family:var(--body);background:${c.ivory};color:${c.charcoal};">
+
+    <nav style="position:sticky;top:0;z-index:50;background:${c.primaryDeep}D9;backdrop-filter:blur(10px);border-bottom:1px solid ${c.accent}33;">
+      <div style="max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+        <a href="#top" style="font-family:var(--display);color:${c.ivory};font-size:18px;letter-spacing:1px;">G &amp; M</a>
+        <div style="display:flex;gap:24px;align-items:center;flex-wrap:wrap;">
+          ${navLinks.map(l => `<a href="${l.href}" style="font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:${c.ivoryDeep};opacity:.85;">${l.label}</a>`).join('')}
+          <a href="${WHATSAPP_LINK}" target="_blank" rel="noopener noreferrer" aria-label="Join WhatsApp group"
+            style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:${c.accent};color:${c.primaryDeep};">${whatsappIcon(15)}</a>
+        </div>
+      </div>
+    </nav>
+
+    <section id="top" style="position:relative;overflow:hidden;padding:72px 24px 80px;text-align:center;">
+      <img src="assets/proposal/prop01.jpeg" alt="" class="bg-alive" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 20%, ${c.primary}E6 0%, ${c.primaryDeep}F2 75%);"></div>
+      <div class="rise-in" style="position:relative;max-width:720px;margin:0 auto;">
+        <div style="font-family:var(--body);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:${c.accentLight};margin-bottom:22px;">The Wedding Of</div>
+        ${monogramHTML()}
+        <h1 style="font-family:var(--display);font-weight:400;color:${c.ivory};font-size:clamp(40px,8vw,78px);letter-spacing:2px;margin:26px 0 6px;line-height:1.05;">
+          Gideon <span style="color:${c.accentLight};">&amp;</span> Margie
+        </h1>
+        <p style="font-family:var(--script);font-style:italic;font-size:24px;color:${c.ivoryDeep};margin:0 0 30px;">are tying the knot</p>
+        <div style="display:inline-block;border:1px solid ${c.accent}66;border-radius:999px;padding:10px 26px;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:${c.accentLight};margin-bottom:44px;">${WEDDING_DATE_LABEL}</div>
+        <div id="countdownBox"></div>
+      </div>
+    </section>
+
+    <section id="venue" style="position:relative;padding:80px 24px;overflow:hidden;">
+      <img src="assets/kukyaala/kuk01.jpeg" alt="" class="bg-alive-slower" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <div style="position:absolute;inset:0;background:${c.ivory}E8;"></div>
+      <div style="max-width:620px;margin:0 auto;position:relative;">
+        ${sectionHeadingHTML('Where to be', 'The Venue', 'One celebration, one unforgettable day')}
+        <div style="background:#fff;border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(31,58,46,0.06);">
+          <img src="assets/logos/kalanoga.png" alt="Kalanoga Resort" style="height:56px;width:auto;margin:0 auto 16px;">
+          <div style="font-family:var(--display);font-size:24px;color:${c.primary};margin-bottom:8px;">${VENUE.name}</div>
+          <div style="color:${c.muted};font-size:14px;margin-bottom:4px;">${VENUE.address}</div>
+          <div style="color:${c.muted};font-size:14px;margin-bottom:20px;">Starts at ${VENUE.time}</div>
+          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(VENUE.mapsQuery)}" target="_blank" rel="noopener noreferrer"
+            style="display:inline-block;border:1.5px solid ${c.primary};color:${c.primary};border-radius:999px;padding:10px 24px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;">Get Directions</a>
+        </div>
+      </div>
+    </section>
+
+    ${vineDividerHTML()}
+
+    <section id="timeline" style="position:relative;padding:30px 24px 80px;overflow:hidden;">
+      <div style="max-width:720px;margin:0 auto;position:relative;">
+        ${sectionHeadingHTML('Order of the day', 'Timeline')}
+        <div style="position:relative;padding-left:28px;">
+          <div style="position:absolute;left:6px;top:6px;bottom:6px;width:1.5px;background:${c.accent}55;"></div>
+          ${TIMELINE.map(ev => `
+            <div style="position:relative;margin-bottom:30px;">
+              <div style="position:absolute;left:-28px;top:3px;width:12px;height:12px;border-radius:50%;background:${c.accent};border:3px solid ${c.ivory};box-shadow:0 0 0 1px ${c.accent};"></div>
+              <div style="font-family:var(--display);font-size:18px;color:${c.secondary};margin-bottom:2px;">${ev.time}</div>
+              <div style="font-size:16px;font-weight:500;">${ev.label}</div>
+              ${ev.note ? `<div style="font-size:13px;color:${c.muted};margin-top:2px;">${ev.note}</div>` : ''}
+            </div>`).join('')}
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" style="padding:80px 24px;background:${c.ivoryDeep};">
+      <div style="max-width:1100px;margin:0 auto;">
+        ${sectionHeadingHTML('A few frames', 'Gallery', 'Moments along the way to forever')}
+        ${galleryHTML()}
+      </div>
+    </section>
+
+    ${vineDividerHTML()}
+
+    <section id="pledge" style="padding:30px 24px 80px;background:${c.ivory};">
+      <div style="max-width:560px;margin:0 auto;">
+        ${sectionHeadingHTML('With love', 'Make a Pledge', 'Every contribution helps us start our new life together')}
+        <div id="pledgeFormWrap">${pledgeFormHTML()}</div>
+      </div>
+    </section>
+
+    <section id="rsvp" style="padding:0 24px 80px;background:${c.ivory};">
+      <div style="max-width:560px;margin:0 auto;">
+        ${sectionHeadingHTML('Kindly respond', 'RSVP', 'We can\u2019t wait to celebrate with you')}
+        <div id="rsvpFormWrap">${rsvpFormHTML()}</div>
+      </div>
+    </section>
+
+    <section style="background:${c.primary};padding:56px 24px;text-align:center;">
+      <div style="max-width:480px;margin:0 auto;">
+        <h3 style="font-family:var(--display);color:${c.ivory};font-size:28px;margin-bottom:10px;">Stay in the loop</h3>
+        <p style="color:${c.ivoryDeep};font-size:14px;margin-bottom:24px;">Join our WhatsApp group for updates, directions, and last-minute details.</p>
+        <a href="${WHATSAPP_LINK}" target="_blank" rel="noopener noreferrer"
+          style="display:inline-flex;align-items:center;gap:10px;background:${c.accent};color:${c.primaryDeep};border-radius:999px;padding:13px 30px;font-size:14px;letter-spacing:1px;font-weight:500;">
+          ${whatsappIcon(18)} Join our WhatsApp Group
+        </a>
+        <p style="color:${c.ivoryDeep};opacity:.75;font-size:13px;margin-top:22px;">
+          Questions? Call or WhatsApp <a href="tel:+${CONTACT_PHONE_INTL}" style="color:${c.accentLight};text-decoration:underline;">${CONTACT_PHONE_DISPLAY}</a>
+        </p>
+      </div>
+    </section>
+
+    <footer style="background:${c.primaryDeep};padding:40px 24px;text-align:center;">
+      ${monogramHTML(56)}
+      <div style="font-family:var(--display);color:${c.ivory};font-size:18px;margin-top:14px;">Gideon &amp; Margie</div>
+      <div style="color:${c.accentLight};font-size:13px;margin-top:4px;">${WEDDING_DATE_LABEL}</div>
+      <div style="color:${c.ivoryDeep};opacity:.5;font-size:12px;margin-top:20px;">With love and gratitude &middot; See you there</div>
+    </footer>
+  </div>
+  <div id="lightbox"></div>
+  `;
+
+  document.querySelectorAll('[data-gallery-index]').forEach(btn => {
+    btn.addEventListener('click', () => openLightbox(Number(btn.dataset.galleryIndex)));
+  });
+
+  activateGalleryImages();
+  attachFormHandlers();
+  updateRsvpVisibility();
+  startCountdown();
+}
+
+render();
+</script>
+</body>
+</html>
