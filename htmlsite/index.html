@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Gideon &amp; Margie — 12th December</title>
-<meta name="description" content="Join us as we celebrate the wedding of Gideon and Margie, Saturday 12th December." />
+<title>Gideon &amp; Margie — 6th February 2027</title>
+<meta name="description" content="Join us as we celebrate the wedding of Gideon and Margie, Saturday 6th February 2027." />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -184,8 +184,8 @@ const SUPABASE_URL = 'https://mifzfucxwwqbjpfvlrni.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1pZnpmdWN4d3dxYmpwZnZscm5pIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg3Njc5NDgsImV4cCI6MjEwNDM0Mzk0OH0.oCbthMJIL09rKz-ZWxZlNHVStzklviSyCjAdG7b8b7k';
 const isSupabaseConfigured = Boolean(SUPABASE_URL && SUPABASE_ANON_KEY);
 
-const WEDDING_DATE_ISO = '2026-12-12T10:00:00+03:00'; // EDIT ME if the year is different
-const WEDDING_DATE_LABEL = 'Saturday \u00b7 12th December';
+const WEDDING_DATE_ISO = '2027-02-06T10:00:00+03:00';
+const WEDDING_DATE_LABEL = 'Saturday \u00b7 6th February 2027';
 
 const VENUE = {
   icon: '\u{1F942}',
@@ -223,9 +223,9 @@ const MEMORY_LANE_CAPTIONS = [
   'January 2020', 'Thee Date', 'The Date', 'Pre-Dating date', '', '', 'Oil & Gas Convention 2019', 'College Of Natural Sciences DInner 2017', 'Campus Days', 'Gideons Birthday DInner 2023',
 ];
 const GALLERY_SECTIONS = [
+  { title: 'Proposal', photos: photos('proposal', 24, 'prop', [19]) },
   { title: 'The Kukyaala', photos: photos('kukyaala', 19, 'kuk', [8]) },
   { title: 'Road Down Memory Lane', photos: photos('memorylane', 10, 'mem'), captions: MEMORY_LANE_CAPTIONS },
-  { title: 'Proposal', photos: photos('proposal', 24, 'prop', [19]) },
 ];
 const ALL_PHOTOS = GALLERY_SECTIONS.flatMap(s => s.photos);
 const ALL_CAPTIONS = GALLERY_SECTIONS.flatMap(s => s.photos.map((_, i) => (s.captions && s.captions[i]) || ''));
@@ -570,7 +570,7 @@ function activateGalleryImages(){
 }
 
 function render(){
-  document.title = 'Gideon & Margie — 12th December';
+  document.title = 'Gideon & Margie — 6th February 2027';
 
   const navLinks = [
     { href:'#venue', label:'Venue' },
@@ -627,13 +627,16 @@ function render(){
       <div style="position:absolute;inset:0;background:${c.ivory}E8;"></div>
       <div style="max-width:620px;margin:0 auto;position:relative;">
         ${sectionHeadingHTML('Where to be', 'The Venue', 'One celebration, one unforgettable day')}
-        <div style="background:#fff;border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(31,58,46,0.06);">
-          <img src="assets/logos/kalanoga.png" alt="Kalanoga Resort" style="height:56px;width:auto;margin:0 auto 16px;">
-          <div style="font-family:var(--display);font-size:24px;color:${c.primary};margin-bottom:8px;">${VENUE.name}</div>
-          <div style="color:${c.muted};font-size:14px;margin-bottom:4px;">${VENUE.address}</div>
-          <div style="color:${c.muted};font-size:14px;margin-bottom:20px;">Starts at ${VENUE.time}</div>
-          <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(VENUE.mapsQuery)}" target="_blank" rel="noopener noreferrer"
-            style="display:inline-block;border:1.5px solid ${c.primary};color:${c.primary};border-radius:999px;padding:10px 24px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;">Get Directions</a>
+        <div style="position:relative;overflow:hidden;background:rgba(255,255,255,0.78);border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(31,58,46,0.06);">
+          <div style="position:absolute;inset:0;z-index:0;background-image:url('assets/logos/Screenshot 2026-10-08 214043.png');background-size:cover;background-position:center;filter:blur(2.5px) saturate(1.2);transform:scale(1.08);opacity:0.58;"></div>
+          <div style="position:relative;z-index:1;">
+            <img src="assets/logos/kalanoga.png" alt="Kalanoga Resort" style="height:56px;width:auto;margin:0 auto 16px;">
+            <div style="font-family:var(--display);font-size:24px;color:${c.primary};margin-bottom:8px;">${VENUE.name}</div>
+            <div style="color:${c.muted};font-size:14px;margin-bottom:4px;">${VENUE.address}</div>
+            <div style="color:${c.muted};font-size:14px;margin-bottom:20px;">Starts at ${VENUE.time}</div>
+            <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(VENUE.mapsQuery)}" target="_blank" rel="noopener noreferrer"
+              style="display:inline-block;border:1.5px solid ${c.primary};color:${c.primary};border-radius:999px;padding:10px 24px;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;background:rgba(255,255,255,0.6);">Get Directions</a>
+          </div>
         </div>
       </div>
     </section>
