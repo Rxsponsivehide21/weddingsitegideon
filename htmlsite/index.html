@@ -15,11 +15,11 @@
     --body: 'Jost', system-ui, sans-serif;
     --ivory: #FBF7EE;
     --ivoryDeep: #F1E9D6;
-    --primary: #1F3A2E;
-    --primaryDeep: #132720;
-    --accent: #B8933D;
-    --accentLight: #D8BE7C;
-    --secondary: #6E2A3B;
+    --primary: #4169E1;
+    --primaryDeep: #233B8B;
+    --accent: #A78BFA;
+    --accentLight: #D8CCFF;
+    --secondary: #5B4B9A;
     --charcoal: #24261F;
     --muted: #6B6F5E;
   }
@@ -76,7 +76,7 @@
     height: 100%;
     min-width: 0;
     overflow: hidden;
-    background: #F1E9D6;
+    background: var(--ivoryDeep);
   }
   .gallery-photo-shell .gm-loader {
     position: absolute;
@@ -84,7 +84,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #F1E9D6;
+    background: var(--ivoryDeep);
     z-index: 1;
     transition: opacity 0.22s ease;
   }
@@ -92,7 +92,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(100deg, transparent 35%, rgba(184,147,61,0.22) 50%, transparent 65%);
+    background: linear-gradient(100deg, transparent 35%, rgba(167,139,250,0.22) 50%, transparent 65%);
     background-size: 250% 100%;
     animation: gmShimmer 2.4s ease-in-out infinite;
   }
@@ -101,7 +101,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 1.5px solid #B8933D;
+    border: 1.5px solid var(--accent);
     background: rgba(251,247,238,0.75);
     display: flex;
     align-items: center;
@@ -115,14 +115,14 @@
     inset: -7px;
     border-radius: 50%;
     border: 1.5px solid transparent;
-    border-top-color: #B8933D;
+    border-top-color: var(--accent);
     animation: gmRingSpin 1.3s linear infinite;
   }
   .gallery-photo-shell .gm-loader-mark span {
     font-family: 'Italiana', serif;
     font-size: 17px;
     letter-spacing: 1px;
-    color: #1F3A2E;
+    color: var(--primary);
   }
   .gallery-photo-shell img {
     position: absolute;
@@ -220,7 +220,7 @@ function photos(folder, count, prefix, excluded = []){
   return list;
 }
 const MEMORY_LANE_CAPTIONS = [
-  'January 2020', 'Thee Date', 'The Date', 'Pre-Dating date', '', '', 'Oil & Gas Convention 2019', 'College Of Natural Sciences DInner 2017', 'Campus Days', 'Gideons Birthday DInner 2023',
+  'January 2020', 'Thee Date', 'The Date', 'Pre-Dating date', '', '', 'Oil & Gas Convention 2019', 'College Of Natural Sciences Dinner 2017', 'Campus Days', 'Gideons Birthday Dinner 2023',
 ];
 const GALLERY_SECTIONS = [
   { title: 'Proposal', photos: photos('proposal', 24, 'prop', [19]) },
@@ -230,7 +230,7 @@ const GALLERY_SECTIONS = [
 const ALL_PHOTOS = GALLERY_SECTIONS.flatMap(s => s.photos);
 const ALL_CAPTIONS = GALLERY_SECTIONS.flatMap(s => s.photos.map((_, i) => (s.captions && s.captions[i]) || ''));
 
-const c = { ivory:'#FBF7EE', ivoryDeep:'#F1E9D6', primary:'#1F3A2E', primaryDeep:'#132720', accent:'#B8933D', accentLight:'#D8BE7C', secondary:'#6E2A3B', charcoal:'#24261F', muted:'#6B6F5E' };
+const c = { ivory:'#FBF7EE', ivoryDeep:'#F1E9D6', primary:'#4169E1', primaryDeep:'#233B8B', accent:'#A78BFA', accentLight:'#D8CCFF', secondary:'#5B4B9A', charcoal:'#24261F', muted:'#6B6F5E' };
 
 /* ================================================================== */
 /*  State                                                              */
@@ -239,7 +239,6 @@ const state = {
   galleryIndex: null,
   rsvp: { fullName:'', phone:'', email:'', attending:'yes', guestCount:1, message:'', status:'idle' },
   pledge: { fullName:'', phone:'', amount:'', message:'', status:'idle' },
-  pledgeMade: localStorage.getItem('pledgeMade') === 'true',
 };
 
 function escapeAttr(s){ return String(s).replace(/"/g, '&quot;'); }
@@ -321,7 +320,7 @@ function renderLightbox(){
   const src = ALL_PHOTOS[state.galleryIndex];
   const caption = ALL_CAPTIONS[state.galleryIndex];
   el.innerHTML = `
-    <div id="lightboxOverlay" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(19,39,32,0.94);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;">
+    <div id="lightboxOverlay" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(35,59,139,0.94);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;">
       <button id="lbClose" aria-label="Close" style="position:absolute;top:20px;right:24px;background:none;border:none;color:${c.ivory};font-size:28px;line-height:1;">&times;</button>
       <button id="lbPrev" aria-label="Previous photo" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:${c.ivory};font-size:32px;padding:12px;">&#8249;</button>
       <button id="lbNext" aria-label="Next photo" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:${c.ivory};font-size:32px;padding:12px;">&#8250;</button>
@@ -412,7 +411,7 @@ function pledgeFormHTML(){
     return `<div style="text-align:center;padding:30px 20px;background:#fff;border-radius:16px;border:1px solid ${c.accent}33;">
       <div style="font-size:32px;margin-bottom:8px;">\u{1F49B}</div>
       <div style="font-family:var(--display);font-size:22px;color:${c.primary};margin-bottom:6px;">Thank you so much!</div>
-      <p style="color:${c.muted};font-size:14px;">Your pledge means the world to us &mdash; RSVP has now been unlocked below.</p>
+      <p style="color:${c.muted};font-size:14px;">Your generosity means the world to us. Thank you for supporting our new life together.</p>
     </div>`;
   }
   return `<form id="pledgeForm" style="background:#fff;border:1px solid ${c.accent}33;border-radius:16px;padding:32px;display:flex;flex-direction:column;gap:18px;">
@@ -477,7 +476,6 @@ function rsvpFormHTML(){
     <div><label style="${labelStyle()}">Message (optional)</label>
       <textarea name="message" style="${inputStyle()};min-height:80px;resize:vertical;" placeholder="Any dietary notes or well-wishes">${r.message}</textarea></div>
     ${r.status === 'error' ? `<div style="color:${c.secondary};font-size:13px;">Something went wrong &mdash; please try again.</div>` : ''}
-    ${r.status === 'needs-pledge' ? `<div style="color:${c.secondary};font-size:13px;text-align:center;">Almost there &mdash; please make your pledge first, then come straight back here. <a href="#pledge" style="color:${c.primary};text-decoration:underline;">Go to Pledge</a></div>` : ''}
     <button type="submit" ${!isSupabaseConfigured ? 'disabled' : ''} style="background:${c.accent};color:${c.primaryDeep};border:none;border-radius:999px;padding:13px;font-size:14px;letter-spacing:1px;font-weight:600;text-transform:uppercase;opacity:${r.status==='submitting'?0.7:1};">
       ${r.status === 'submitting' ? 'Sending\u2026' : 'RSVP for the Wedding'}
     </button>
@@ -501,12 +499,6 @@ function attachFormHandlers(){
         amount: Number(state.pledge.amount), message: state.pledge.message,
       });
       state.pledge.status = error ? 'error' : 'success';
-      if (!error) {
-        state.pledgeMade = true;
-        localStorage.setItem('pledgeMade', 'true');
-        renderRsvpSection();
-        updateRsvpVisibility();
-      }
       renderPledgeSection();
     });
   }
@@ -523,11 +515,6 @@ function attachFormHandlers(){
       state.rsvp.email = fd.get('email') || '';
       state.rsvp.message = fd.get('message') || '';
       state.rsvp.guestCount = Number(fd.get('guestCount')) || 1;
-      if (!state.pledgeMade) {
-        state.rsvp.status = 'needs-pledge';
-        renderRsvpSection();
-        return;
-      }
       state.rsvp.status = 'submitting';
       renderRsvpSection();
       const { error } = await submitToSupabase('rsvps', {
@@ -547,13 +534,6 @@ function renderRsvpSection(){
   document.getElementById('rsvpFormWrap').innerHTML = rsvpFormHTML();
   attachFormHandlers();
 }
-function updateRsvpVisibility(){
-  const rsvpSection = document.getElementById('rsvp');
-  const rsvpLink = document.querySelector('a[href="#rsvp"]');
-  if (rsvpSection) rsvpSection.style.display = state.pledgeMade ? '' : 'none';
-  if (rsvpLink) rsvpLink.style.display = state.pledgeMade ? '' : 'none';
-}
-
 /* ================================================================== */
 /*  WhatsApp icon                                                       */
 /* ================================================================== */
@@ -605,7 +585,7 @@ function render(){
         </h1>
         <p style="font-family:var(--script);font-style:italic;font-size:24px;color:${c.ivoryDeep};margin:0 0 30px;">are tying the knot</p>
         <div style="display:inline-block;border:1px solid ${c.accent}66;border-radius:999px;padding:10px 26px;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:${c.accentLight};margin-bottom:28px;">${WEDDING_DATE_LABEL}</div>
-        <div style="max-width:760px;margin:0 auto 30px;padding:24px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(216,190,124,0.35);border-radius:18px;box-shadow:0 12px 30px rgba(19,39,32,0.12);">
+        <div style="max-width:760px;margin:0 auto 30px;padding:24px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.35);border-radius:18px;box-shadow:0 12px 30px rgba(35,59,139,0.12);">
           <p style="font-family:var(--script);font-style:italic;font-size:clamp(20px,2vw,28px);line-height:1.6;color:${c.ivory};margin:0 0 18px;">This love story that you are about to witness is one like no other.</p>
           <div style="font-family:var(--body);font-size:15px;line-height:1.9;color:${c.ivoryDeep};text-align:left;max-width:680px;margin:0 auto;">
             <p style="margin:0 0 12px;">It began in the simple days of campus life, when a young man caught sight of a young woman, and in that fleeting moment, his heart took notice.</p>
@@ -627,7 +607,7 @@ function render(){
       <div style="position:absolute;inset:0;background:${c.ivory}E8;"></div>
       <div style="max-width:620px;margin:0 auto;position:relative;">
         ${sectionHeadingHTML('Where to be', 'The Venue', 'One celebration, one unforgettable day')}
-        <div style="position:relative;overflow:hidden;background:rgba(255,255,255,0.78);border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(31,58,46,0.06);">
+        <div style="position:relative;overflow:hidden;background:rgba(255,255,255,0.78);border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(35,59,139,0.06);">
           <div style="position:absolute;inset:0;z-index:0;background-image:url('assets/logos/kalanoga-beach.png');background-size:cover;background-position:center;filter:blur(2.5px) saturate(1.2);transform:scale(1.08);opacity:0.58;"></div>
           <div style="position:relative;z-index:1;">
             <img src="assets/logos/kalanoga.png" alt="Kalanoga Resort" style="height:56px;width:auto;margin:0 auto 16px;">
@@ -712,7 +692,6 @@ function render(){
 
   activateGalleryImages();
   attachFormHandlers();
-  updateRsvpVisibility();
   startCountdown();
 }
 
