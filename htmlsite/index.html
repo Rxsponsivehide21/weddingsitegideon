@@ -43,6 +43,14 @@
   .bg-alive{ animation:kenBurnsSlow 26s ease-in-out infinite; will-change:transform; }
   .bg-alive-slower{ animation:kenBurnsSlow 34s ease-in-out infinite; will-change:transform; }
 
+  .hero-slideshow{ position:absolute; inset:0; overflow:hidden; }
+  .hero-slideshow img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; transform:scale(1.035);
+    transition:opacity 1.8s ease-in-out, transform 8s ease-out;
+  }
+  .hero-slideshow img.is-active{ opacity:1; transform:scale(1.09); }
+
   .gallery-tile{
     width: 100%;
     aspect-ratio: 1;
@@ -224,8 +232,15 @@ const MEMORY_LANE_CAPTIONS = [
 ];
 const GALLERY_SECTIONS = [
   { title: 'Proposal', photos: photos('proposal', 24, 'prop', [19]) },
-  { title: 'The Kukyaala', photos: photos('kukyaala', 19, 'kuk', [8]) },
+  { title: 'The Kukyaala', photos: photos('kukyaala', 19, 'kuk', [8, 9]) },
   { title: 'Road Down Memory Lane', photos: photos('memorylane', 10, 'mem'), captions: MEMORY_LANE_CAPTIONS },
+];
+const HERO_SLIDES = [
+  'assets/proposal/prop01.jpeg', 'assets/proposal/prop04.jpeg', 'assets/proposal/prop07.jpeg',
+  'assets/kukyaala/kuk01.jpeg', 'assets/kukyaala/kuk03.jpeg', 'assets/kukyaala/kuk05.jpeg',
+  'assets/kukyaala/kuk07.jpeg', 'assets/kukyaala/kuk10.jpeg', 'assets/kukyaala/kuk12.jpeg',
+  'assets/kukyaala/kuk15.jpeg', 'assets/kukyaala/kuk18.jpeg',
+  'assets/memorylane/mem01.jpeg', 'assets/memorylane/mem04.jpeg', 'assets/memorylane/mem07.jpeg',
 ];
 const ALL_PHOTOS = GALLERY_SECTIONS.flatMap(s => s.photos);
 const ALL_CAPTIONS = GALLERY_SECTIONS.flatMap(s => s.photos.map((_, i) => (s.captions && s.captions[i]) || ''));
@@ -549,6 +564,29 @@ function activateGalleryImages(){
   });
 }
 
+let heroSlideshowTimer = null;
+function startHeroSlideshow(){
+  if (heroSlideshowTimer) clearInterval(heroSlideshowTimer);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const layers = document.querySelectorAll('.hero-slideshow img');
+  if (layers.length < 2 || HERO_SLIDES.length < 2) return;
+
+  let activeLayer = 0;
+  let slideIndex = 0;
+  heroSlideshowTimer = setInterval(() => {
+    slideIndex = (slideIndex + 1) % HERO_SLIDES.length;
+    const nextLayer = 1 - activeLayer;
+    const nextImage = new Image();
+    nextImage.onload = () => {
+      layers[nextLayer].src = HERO_SLIDES[slideIndex];
+      layers[nextLayer].classList.add('is-active');
+      layers[activeLayer].classList.remove('is-active');
+      activeLayer = nextLayer;
+    };
+    nextImage.src = HERO_SLIDES[slideIndex];
+  }, 6500);
+}
+
 function render(){
   document.title = 'Gideon & Margie — 6th February 2027';
 
@@ -575,7 +613,10 @@ function render(){
     </nav>
 
     <section id="top" style="position:relative;overflow:hidden;padding:72px 24px 80px;text-align:center;">
-      <img src="assets/proposal/prop01.jpeg" alt="" class="bg-alive" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+      <div class="hero-slideshow" aria-hidden="true">
+        <img src="${HERO_SLIDES[0]}" alt="" class="is-active">
+        <img src="${HERO_SLIDES[1]}" alt="">
+      </div>
       <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 20%, ${c.primary}E6 0%, ${c.primaryDeep}F2 75%);"></div>
       <div class="rise-in" style="position:relative;max-width:720px;margin:0 auto;">
         <div style="font-family:var(--body);font-size:12px;letter-spacing:5px;text-transform:uppercase;color:${c.accentLight};margin-bottom:22px;">The Wedding Of</div>
@@ -585,7 +626,7 @@ function render(){
         </h1>
         <p style="font-family:var(--script);font-style:italic;font-size:24px;color:${c.ivoryDeep};margin:0 0 30px;">are tying the knot</p>
         <div style="display:inline-block;border:1px solid ${c.accent}66;border-radius:999px;padding:10px 26px;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:${c.accentLight};margin-bottom:28px;">${WEDDING_DATE_LABEL}</div>
-        <div style="max-width:760px;margin:0 auto 30px;padding:24px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(169,201,222,0.35);border-radius:18px;box-shadow:0 12px 30px rgba(48,76,99,0.12);">
+        <div style="max-width:760px;margin:0 auto 30px;padding:24px 20px;background:rgba(255,255,255,0.046);border:1px solid rgba(169,201,222,0.35);border-radius:18px;box-shadow:0 12px 30px rgba(48,76,99,0.12);">
           <p style="font-family:var(--script);font-style:italic;font-size:clamp(20px,2vw,28px);line-height:1.6;color:${c.ivory};margin:0 0 18px;">This love story that you are about to witness is one like no other.</p>
           <div style="font-family:var(--body);font-size:15px;line-height:1.9;color:${c.ivoryDeep};text-align:left;max-width:680px;margin:0 auto;">
             <p style="margin:0 0 12px;">It began in the simple days of campus life, when a young man caught sight of a young woman, and in that fleeting moment, his heart took notice.</p>
@@ -681,6 +722,8 @@ function render(){
       <div style="font-family:var(--display);color:${c.ivory};font-size:18px;margin-top:14px;">Gideon &amp; Margie</div>
       <div style="color:${c.accentLight};font-size:13px;margin-top:4px;">${WEDDING_DATE_LABEL}</div>
       <div style="color:${c.ivoryDeep};opacity:.5;font-size:12px;margin-top:20px;">With love and gratitude &middot; See you there</div>
+      <div style="color:${c.ivoryDeep};opacity:.72;font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-top:18px;">Made by</div>
+      <img src="assets/kukyaala/c2013037-e334-4ba1-91c4-ea27ff596de8-Photoroom.png" alt="Zuri Tech" style="width:140px;height:56px;object-fit:cover;object-position:center;margin:4px auto 0;">
     </footer>
   </div>
   <div id="lightbox"></div>
@@ -691,6 +734,7 @@ function render(){
   });
 
   activateGalleryImages();
+  startHeroSlideshow();
   attachFormHandlers();
   startCountdown();
 }
