@@ -13,15 +13,15 @@
     --display: 'Italiana', serif;
     --script: 'Cormorant Garamond', serif;
     --body: 'Jost', system-ui, sans-serif;
-    --ivory: #FBF7EE;
-    --ivoryDeep: #F1E9D6;
-    --primary: #4169E1;
-    --primaryDeep: #233B8B;
-    --accent: #A78BFA;
-    --accentLight: #D8CCFF;
-    --secondary: #5B4B9A;
-    --charcoal: #24261F;
-    --muted: #6B6F5E;
+    --ivory: #FBF9F4;
+    --ivoryDeep: #EAF1F5;
+    --primary: #5D87A3;
+    --primaryDeep: #304C63;
+    --accent: #A9C9DE;
+    --accentLight: #D9EAF3;
+    --secondary: #46677F;
+    --charcoal: #29323A;
+    --muted: #697781;
   }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; }
@@ -92,7 +92,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(100deg, transparent 35%, rgba(167,139,250,0.22) 50%, transparent 65%);
+    background: linear-gradient(100deg, transparent 35%, rgba(169,201,222,0.22) 50%, transparent 65%);
     background-size: 250% 100%;
     animation: gmShimmer 2.4s ease-in-out infinite;
   }
@@ -102,7 +102,7 @@
     height: 56px;
     border-radius: 50%;
     border: 1.5px solid var(--accent);
-    background: rgba(251,247,238,0.75);
+    background: rgba(251,249,244,0.75);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -230,7 +230,7 @@ const GALLERY_SECTIONS = [
 const ALL_PHOTOS = GALLERY_SECTIONS.flatMap(s => s.photos);
 const ALL_CAPTIONS = GALLERY_SECTIONS.flatMap(s => s.photos.map((_, i) => (s.captions && s.captions[i]) || ''));
 
-const c = { ivory:'#FBF7EE', ivoryDeep:'#F1E9D6', primary:'#4169E1', primaryDeep:'#233B8B', accent:'#A78BFA', accentLight:'#D8CCFF', secondary:'#5B4B9A', charcoal:'#24261F', muted:'#6B6F5E' };
+const c = { ivory:'#FBF9F4', ivoryDeep:'#EAF1F5', primary:'#5D87A3', primaryDeep:'#304C63', accent:'#A9C9DE', accentLight:'#D9EAF3', secondary:'#46677F', charcoal:'#29323A', muted:'#697781' };
 
 /* ================================================================== */
 /*  State                                                              */
@@ -320,7 +320,7 @@ function renderLightbox(){
   const src = ALL_PHOTOS[state.galleryIndex];
   const caption = ALL_CAPTIONS[state.galleryIndex];
   el.innerHTML = `
-    <div id="lightboxOverlay" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(35,59,139,0.94);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;">
+    <div id="lightboxOverlay" role="dialog" aria-modal="true" style="position:fixed;inset:0;background:rgba(48,76,99,0.94);z-index:100;display:flex;align-items:center;justify-content:center;padding:24px;">
       <button id="lbClose" aria-label="Close" style="position:absolute;top:20px;right:24px;background:none;border:none;color:${c.ivory};font-size:28px;line-height:1;">&times;</button>
       <button id="lbPrev" aria-label="Previous photo" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:${c.ivory};font-size:32px;padding:12px;">&#8249;</button>
       <button id="lbNext" aria-label="Next photo" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:${c.ivory};font-size:32px;padding:12px;">&#8250;</button>
@@ -585,7 +585,7 @@ function render(){
         </h1>
         <p style="font-family:var(--script);font-style:italic;font-size:24px;color:${c.ivoryDeep};margin:0 0 30px;">are tying the knot</p>
         <div style="display:inline-block;border:1px solid ${c.accent}66;border-radius:999px;padding:10px 26px;font-size:14px;letter-spacing:2px;text-transform:uppercase;color:${c.accentLight};margin-bottom:28px;">${WEDDING_DATE_LABEL}</div>
-        <div style="max-width:760px;margin:0 auto 30px;padding:24px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(167,139,250,0.35);border-radius:18px;box-shadow:0 12px 30px rgba(35,59,139,0.12);">
+        <div style="max-width:760px;margin:0 auto 30px;padding:24px 20px;background:rgba(255,255,255,0.06);border:1px solid rgba(169,201,222,0.35);border-radius:18px;box-shadow:0 12px 30px rgba(48,76,99,0.12);">
           <p style="font-family:var(--script);font-style:italic;font-size:clamp(20px,2vw,28px);line-height:1.6;color:${c.ivory};margin:0 0 18px;">This love story that you are about to witness is one like no other.</p>
           <div style="font-family:var(--body);font-size:15px;line-height:1.9;color:${c.ivoryDeep};text-align:left;max-width:680px;margin:0 auto;">
             <p style="margin:0 0 12px;">It began in the simple days of campus life, when a young man caught sight of a young woman, and in that fleeting moment, his heart took notice.</p>
@@ -607,7 +607,7 @@ function render(){
       <div style="position:absolute;inset:0;background:${c.ivory}E8;"></div>
       <div style="max-width:620px;margin:0 auto;position:relative;">
         ${sectionHeadingHTML('Where to be', 'The Venue', 'One celebration, one unforgettable day')}
-        <div style="position:relative;overflow:hidden;background:rgba(255,255,255,0.78);border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(35,59,139,0.06);">
+        <div style="position:relative;overflow:hidden;background:rgba(255,255,255,0.78);border:1px solid ${c.accent}33;border-radius:16px;padding:32px;text-align:center;box-shadow:0 8px 24px rgba(48,76,99,0.06);">
           <div style="position:absolute;inset:0;z-index:0;background-image:url('assets/logos/kalanoga-beach.png');background-size:cover;background-position:center;filter:blur(2.5px) saturate(1.2);transform:scale(1.08);opacity:0.58;"></div>
           <div style="position:relative;z-index:1;">
             <img src="assets/logos/kalanoga.png" alt="Kalanoga Resort" style="height:56px;width:auto;margin:0 auto 16px;">
